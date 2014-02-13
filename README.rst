@@ -2,6 +2,14 @@
 Mopidy-Yamaha
 **********
 
+.. image:: https://pypip.in/v/Mopidy-Yamaha/badge.png
+    :target: https://pypi.python.org/pypi/Mopidy-Yamaha/
+    :alt: Latest PyPI version
+
+.. image:: https://pypip.in/d/Mopidy-Yamaha/badge.png
+    :target: https://pypi.python.org/pypi/Mopidy-Yamaha/
+    :alt: Number of PyPI downloads
+
 .. image:: https://travis-ci.org/knutz3n/mopidy-yamaha.png?branch=master
     :target: https://travis-ci.org/mopidy/mopidy-yamaha
     :alt: Travis CI build status
