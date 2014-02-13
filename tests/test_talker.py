@@ -57,6 +57,32 @@ class YamahaTalkerTest(unittest.TestCase):
             )
         self.assertEquals('RX-V673', self.yamaha_talker._model)
 
+    def test_mute_on(self):
+        mock_requests = self._mockRequest(example_responses.Basic_Status)
+
+        self.yamaha_talker.mute(True)
+
+        self.assertEquals(1, len(mock_requests))
+        self.assertEquals(
+            xmltodict.parse('''<YAMAHA_AV cmd="PUT">
+                <Main_Zone><Volume><Mute>On</Mute></Volume></Main_Zone>
+            </YAMAHA_AV>'''),
+            xmltodict.parse(mock_requests[0].get_data())
+            )
+
+    def test_mute_off(self):
+        mock_requests = self._mockRequest(example_responses.Basic_Status)
+
+        self.yamaha_talker.mute(False)
+
+        self.assertEquals(1, len(mock_requests))
+        self.assertEquals(
+            xmltodict.parse('''<YAMAHA_AV cmd="PUT">
+                <Main_Zone><Volume><Mute>Off</Mute></Volume></Main_Zone>
+            </YAMAHA_AV>'''),
+            xmltodict.parse(mock_requests[0].get_data())
+            )
+
     def test_get_volume(self):
         mock_requests = self._mockRequest(example_responses.Basic_Status)
 
