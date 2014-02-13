@@ -1,0 +1,129 @@
+GetParam = '''<YAMAHA_AV rsp="GET" RC="0">
+    <System>
+        <Config>
+            <Model_Name>RX-V673</Model_Name>
+            <System_ID>0FFFFFFF</System_ID>
+            <Version>1.64/2.06</Version>
+            <Feature_Existence>
+                <Main_Zone>1</Main_Zone>
+                <Zone_2>1</Zone_2>
+                <Zone_3>0</Zone_3>
+                <Zone_4>0</Zone_4>
+                <Tuner>1</Tuner>
+                <HD_Radio>0</HD_Radio>
+                <Rhapsody>0</Rhapsody>
+                <Napster>1</Napster>
+                <SiriusXM>0</SiriusXM>
+                <Pandora>0</Pandora>
+                <SERVER>1</SERVER>
+                <NET_RADIO>1</NET_RADIO>
+                <USB>1</USB>
+                <iPod_USB>1</iPod_USB>
+                <AirPlay>1</AirPlay>
+            </Feature_Existence>
+            <Name>
+                <Input>
+                    <HDMI_1>Get HD</HDMI_1>
+                    <HDMI_2>SERVER</HDMI_2>
+                    <HDMI_3>HDMI3</HDMI_3>
+                    <HDMI_4>HDMI4</HDMI_4>
+                    <HDMI_5>HDMI5</HDMI_5>
+                    <AV_1>AV1</AV_1>
+                    <AV_2>AV2</AV_2>
+                    <AV_3>AV3</AV_3>
+                    <AV_4>AV4</AV_4>
+                    <AV_5>AV5</AV_5>
+                    <AV_6>AV6</AV_6>
+                    <V_AUX>V-AUX</V_AUX>
+                    <AUDIO_1>AUDIO1</AUDIO_1>
+                    <AUDIO_2>AUDIO2</AUDIO_2>
+                    <USB>USB</USB>
+                </Input>
+            </Name>
+        </Config>
+    </System>
+</YAMAHA_AV>'''
+
+Basic_Status = '''<YAMAHA_AV rsp="GET" RC="0">
+    <Main_Zone>
+        <Basic_Status>
+            <Power_Control>
+                <Power>On</Power>
+                <Sleep>Off</Sleep>
+            </Power_Control>
+            <Volume>
+                <Lvl>
+                    <Val>-800</Val>
+                    <Exp>1</Exp>
+                    <Unit>dB</Unit>
+                </Lvl>
+                <Mute>Off</Mute>
+                <Subwoofer_Trim>
+                    <Val>0</Val>
+                    <Exp>1</Exp>
+                    <Unit>dB</Unit>
+                </Subwoofer_Trim>
+            </Volume>
+            <Input>
+                <Input_Sel>HDMI2</Input_Sel>
+                <Input_Sel_Item_Info>
+                    <Param>HDMI2</Param>
+                    <RW>RW</RW>
+                    <Title>SERVER</Title>
+                    <Icon>
+                        <On>/YamahaRemoteControl/Icons/icon006.png</On>
+                        <Off />
+                    </Icon>
+                    <Src_Name />
+                    <Src_Number>1</Src_Number>
+                </Input_Sel_Item_Info>
+            </Input>
+            <Surround>
+                <Program_Sel>
+                    <Current>
+                        <Straight>On</Straight>
+                        <Enhancer>Off</Enhancer>
+                        <Sound_Program>2ch Stereo</Sound_Program>
+                    </Current>
+                </Program_Sel>
+                <_3D_Cinema_DSP>Off</_3D_Cinema_DSP>
+            </Surround>
+            <Sound_Video>
+                <Tone>
+                    <Bass>
+                        <Val>0</Val>
+                        <Exp>1</Exp>
+                        <Unit>dB</Unit>
+                    </Bass>
+                    <Treble>
+                        <Val>0</Val>
+                        <Exp>1</Exp>
+                        <Unit>dB</Unit>
+                    </Treble>
+                </Tone>
+                <Pure_Direct>
+                    <Mode>Off</Mode>
+                </Pure_Direct>
+                <HDMI>
+                    <Standby_Through_Info>On</Standby_Through_Info>
+                    <Output>
+                        <OUT_1>On</OUT_1>
+                    </Output>
+                </HDMI>
+                <Adaptive_DRC>Off</Adaptive_DRC>
+                <Dialogue_Adjust>
+                    <Dialogue_Lift>0</Dialogue_Lift>
+                    <Dialogue_Lvl>0</Dialogue_Lvl>
+                </Dialogue_Adjust>
+            </Sound_Video>
+        </Basic_Status>
+    </Main_Zone>
+</YAMAHA_AV>'''
+
+Put_Volume = '''<YAMAHA_AV rsp="PUT" RC="0">
+    <Main_Zone>
+        <Volume>
+            <Lvl></Lvl>
+        </Volume>
+    </Main_Zone>
+</YAMAHA_AV>'''
