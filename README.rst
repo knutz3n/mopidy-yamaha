@@ -69,8 +69,8 @@ Project resources
 =================
 
 - `Source code <https://github.com/knutz3n/mopidy-yamaha>`_
-- `Issue tracker <https://github.com/mopidy/mopidy-yamaha/issues>`_
-- `Download development snapshot <https://github.com/mopidy/mopidy-yamaha/tarball/master#egg=Mopidy-Yamaha-dev>`_
+- `Issue tracker <https://github.com/knutz3n/mopidy-yamaha/issues>`_
+- `Download development snapshot <https://github.com/knutz3n/mopidy-yamaha/tarball/master#egg=Mopidy-Yamaha-dev>`_
 
 
 Changelog
