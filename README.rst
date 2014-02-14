@@ -76,6 +76,17 @@ Project resources
 Changelog
 =========
 
+v0.1.2 (2014-02-14)
+-------------------
+
+- Update changelog
+
+v0.1.1 (2014-02-14)
+-------------------
+
+- Minor doc changes
+- Add talker test for mute on/off
+
 v0.1 (2014-02-13)
 -----------------
 
