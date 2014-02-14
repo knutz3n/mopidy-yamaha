@@ -1,6 +1,6 @@
-**********
+*************
 Mopidy-Yamaha
-**********
+*************
 
 .. image:: https://pypip.in/v/Mopidy-Yamaha/badge.png
     :target: https://pypi.python.org/pypi/Mopidy-Yamaha/
