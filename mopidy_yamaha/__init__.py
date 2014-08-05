@@ -2,15 +2,10 @@ from __future__ import unicode_literals
 
 import os
 
-import pygst
-pygst.require('0.10')
-import gst
-import gobject
-
 from mopidy import config, ext
 
 
-__version__ = '0.1.2'
+__version__ = '0.2.0'
 
 
 class Extension(ext.Extension):
@@ -22,7 +17,13 @@ class Extension(ext.Extension):
         conf_file = os.path.join(os.path.dirname(__file__), 'ext.conf')
         return config.read(conf_file)
 
+    def get_config_schema(self):
+        schema = super(Extension, self).get_config_schema()
+        schema['host'] = config.String()
+        schema['source'] = config.String(optional=True)
+        return schema
+
     def setup(self, registry):
         from .mixer import YamahaMixer
-        gobject.type_register(YamahaMixer)
-        gst.element_register(YamahaMixer, 'yamahamixer', gst.RANK_MARGINAL)
+
+        registry.add('mixer', YamahaMixer)

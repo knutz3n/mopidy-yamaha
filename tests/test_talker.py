@@ -97,7 +97,7 @@ class YamahaTalkerTest(unittest.TestCase):
             )
 
     def test_set_volume(self):
-        volume = -200
+        volume = 20
         mock_requests = self._mockRequest(example_responses.Put_Volume)
 
         self.yamaha_talker.set_volume(volume)
@@ -110,13 +110,13 @@ class YamahaTalkerTest(unittest.TestCase):
                         <Lvl><Val>%d</Val><Exp>1</Exp><Unit>dB</Unit></Lvl>
                     </Volume>
                 </Main_Zone>
-            </YAMAHA_AV>''' % volume),
+            </YAMAHA_AV>''' % -645),
             xmltodict.parse(mock_requests[0].get_data())
             )
 
     def test_set_volume_is_aligned_to_whole_5_values(self):
-        set_volume = -201
-        expect_volume = -205
+        set_volume = 11
+        expect_volume = -720
         mock_requests = self._mockRequest(example_responses.Put_Volume)
 
         self.yamaha_talker.set_volume(set_volume)
