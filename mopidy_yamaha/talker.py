@@ -1,7 +1,9 @@
 import logging
 
-import pykka
 import urllib2
+
+import pykka
+
 import xmltodict
 
 logger = logging.getLogger(__name__)

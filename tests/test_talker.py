@@ -1,14 +1,16 @@
 from __future__ import unicode_literals
 
 import unittest
-import xmltodict
 
 import urllib2
+
 from StringIO import StringIO
 
-from mopidy_yamaha import talker
-
 import example_responses
+
+import xmltodict
+
+from mopidy_yamaha import talker
 
 
 class YamahaTalkerTest(unittest.TestCase):

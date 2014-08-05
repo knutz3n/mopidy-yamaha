@@ -6,9 +6,9 @@ import logging
 
 from mopidy import mixer
 
-from mopidy_yamaha import talker
-
 import pykka
+
+from mopidy_yamaha import talker
 
 
 logger = logging.getLogger(__name__)
