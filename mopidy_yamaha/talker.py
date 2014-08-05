@@ -1,7 +1,9 @@
 import logging
 
-import pykka
 import urllib2
+
+import pykka
+
 import xmltodict
 
 logger = logging.getLogger(__name__)
@@ -14,6 +16,8 @@ class YamahaTalker(pykka.ThreadingActor):
     Since the communication is done in an independent thread, Mopidy won't
     block other requests while sending commands to the receiver.
     """
+
+    _min_volume = -805
 
     def __init__(self, host, source=None):
         super(YamahaTalker, self).__init__()
@@ -57,15 +61,26 @@ class YamahaTalker(pykka.ThreadingActor):
     def get_volume(self):
         response = self._get('<Basic_Status>GetParam</Basic_Status>')
         volume = int(response['Basic_Status']['Volume']['Lvl']['Val'])
-        logger.info('Yamaha amplifier: Volume is "%d"', volume)
-        return volume
+        percentage_volume = (
+            -(volume - self._min_volume)
+            / float(self._min_volume)
+            ) * 100
+        logger.info(
+            'Yamaha amplifier: Volume is "%d" (%d%%)',
+            volume, percentage_volume)
+        return percentage_volume
 
     def set_volume(self, volume):
-        volume = volume - (volume % 5)
-        logger.debug('Yamaha amplifier: Set volume to "%d"', volume)
+        db_volume = (
+            -volume / 100.0 * self._min_volume
+            ) + self._min_volume
+        db_volume = int(db_volume - (db_volume % 5))
+        logger.debug(
+            'Yamaha amplifier: Set volume to "%d" (%d%%)',
+            db_volume, volume)
         self._put('''<Volume>
                 <Lvl><Val>%d</Val><Exp>1</Exp><Unit>dB</Unit></Lvl>
-            </Volume>''' % volume)
+            </Volume>''' % db_volume)
         return True
 
     def _put(self, request_xml, zone='Main_Zone'):
