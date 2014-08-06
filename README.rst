@@ -43,10 +43,10 @@ The Yamaha receiver must be connected to the local network and the receiver ip
 must be specified in the configuration.
 
 To use the Yamaha receiver to control volume, set the ``audio/mixer`` config
-value in ``mopidy.conf`` to ``yamahamixer``. You probably also needs to add some
-properties to the ``audio/mixer`` config value.
+value in ``mopidy.conf`` to ``yamaha``. You must also add some
+properties to the ``yamaha`` config section.
 
-Supported properties includes:
+Supported properties:
 
 - ``host``: The ip or hostname to the receiver.
 
@@ -54,15 +54,16 @@ Supported properties includes:
   ``HDMI1``, ``AV_1``, ``AUDIO_1``, etc. Leave unset if you don't want
   the mixer to change it for you.
 
-Configuration examples::
+Configuration example::
 
-    # Minimum configuration, if the amplifier is available at IP 192.168.1.15
     [audio]
-    mixer = yamahamixer host=192.168.1.15
+    mixer = yamahamixer
 
-    # Full configuration
-    [audio]
-    mixer = yamahamixer host=192.168.1.15 source=HDMI2
+    # If the amplifier is available at IP 192.168.1.15
+    # and audio is connected to the HDMI 2 port.
+    [yamaha]
+    host = 192.168.1.15
+    source=HDMI2
 
 
 Project resources
@@ -80,6 +81,7 @@ v0.2.0 (2014-08-06)
 -------------------
 
 - Use the new Mopidy mixer API (requires Mopidy >=v0.19)
+- New configuration section. Remember to update your ``mopidy.conf``
 
 v0.1.2 (2014-02-14)
 -------------------
