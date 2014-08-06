@@ -2,19 +2,19 @@
 Mopidy-Yamaha
 *************
 
-.. image:: https://pypip.in/v/Mopidy-Yamaha/badge.png
+.. image:: https://img.shields.io/pypi/v/Mopidy-Yamaha.svg?style=flat
     :target: https://pypi.python.org/pypi/Mopidy-Yamaha/
     :alt: Latest PyPI version
 
-.. image:: https://pypip.in/d/Mopidy-Yamaha/badge.png
+.. image:: https://img.shields.io/pypi/dm/Mopidy-Yamaha.svg?style=flat
     :target: https://pypi.python.org/pypi/Mopidy-Yamaha/
     :alt: Number of PyPI downloads
 
-.. image:: https://travis-ci.org/knutz3n/mopidy-yamaha.png?branch=master
+.. image:: https://img.shields.io/travis/knutz3n/mopidy-yamaha/master.png?style=flat
     :target: https://travis-ci.org/mopidy/mopidy-yamaha
     :alt: Travis CI build status
 
-.. image:: https://coveralls.io/repos/knutz3n/mopidy-yamaha/badge.png?branch=master
+.. image:: https://img.shields.io/coveralls/knutz3n/mopidy-yamaha/master.svg?style=flat
    :target: https://coveralls.io/r/knutz3n/mopidy-yamaha?branch=master
    :alt: Test coverage
 
