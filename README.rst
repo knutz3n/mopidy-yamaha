@@ -77,6 +77,11 @@ Project resources
 Changelog
 =========
 
+v0.2.1 (2014-08-06)
+-------------------
+
+- Update README to reflect configuration changes
+
 v0.2.0 (2014-08-06)
 -------------------
 
