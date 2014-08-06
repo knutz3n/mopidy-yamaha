@@ -76,6 +76,11 @@ Project resources
 Changelog
 =========
 
+v0.2.0 (2014-08-06)
+-------------------
+
+- Use the new Mopidy mixer API (requires Mopidy >=v0.19)
+
 v0.1.2 (2014-02-14)
 -------------------
 
