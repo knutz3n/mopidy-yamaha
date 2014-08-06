@@ -57,7 +57,7 @@ Supported properties:
 Configuration example::
 
     [audio]
-    mixer = yamahamixer
+    mixer = yamaha
 
     # If the amplifier is available at IP 192.168.1.15
     # and audio is connected to the HDMI 2 port.
