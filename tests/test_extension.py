@@ -21,4 +21,6 @@ class ExtensionTest(unittest.TestCase):
         schema = ext.get_config_schema()
 
         self.assertIn('enabled', schema)
+        self.assertIn('host', schema)
+        self.assertIn('source', schema)
         self.assertIn('party_mode', schema)
