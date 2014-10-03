@@ -54,7 +54,7 @@ Supported properties:
   ``HDMI1``, ``AV_1``, ``AUDIO_1``, etc. Leave unset if you don't want
   the mixer to change it for you.
 
-- ``party_mody``: Enable/Disable party mode. Party mode sends the same audio to
+- ``party_mode``: Enable/Disable party mode. Party mode sends the same audio to
   all of the receiver's zones. Not available on all receivers.
   Example values: ``on`` or ``off``.
 
