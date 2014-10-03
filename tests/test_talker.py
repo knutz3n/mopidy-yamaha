@@ -16,124 +16,101 @@ from mopidy_yamaha import talker
 class YamahaTalkerTest(unittest.TestCase):
 
     requests = []
-
-    def setUp(self):
-        self.yamaha_talker = talker.YamahaTalker(
-            host='192.168.1.15',
-            source='HDMI2'
-            )
+    default_config = {
+        'host': '192.168.1.15',
+        'source': 'HDMI2',
+        }
 
     def test_on_start_sends_GetParam(self):
-        mock_requests = self._mockRequest(example_responses.GetParam)
+        self._start_talker()
 
-        self.yamaha_talker.on_start()
-
-        self.assertEquals(4, len(mock_requests))
-        self.assertEquals(
-            xmltodict.parse('''<YAMAHA_AV cmd="GET">
+        self.assertEquals(4, len(self.mock_requests))
+        self._assert_request_data('''<YAMAHA_AV cmd="GET">
                 <System><Config>GetParam</Config></System>
-            </YAMAHA_AV>'''),
-            xmltodict.parse(mock_requests[0].get_data())
-            )
-        self.assertEquals(
-            xmltodict.parse('''<YAMAHA_AV cmd="PUT">
+            </YAMAHA_AV>''')
+        self._assert_request_data('''<YAMAHA_AV cmd="PUT">
                 <System>
                     <Power_Control><Power>On</Power></Power_Control>
                 </System>
-            </YAMAHA_AV>'''),
-            xmltodict.parse(mock_requests[1].get_data())
-            )
-        self.assertEquals(
-            xmltodict.parse('''<YAMAHA_AV cmd="PUT">
+            </YAMAHA_AV>''')
+        self._assert_request_data('''<YAMAHA_AV cmd="PUT">
                 <Main_Zone>
                     <Input><Input_Sel>HDMI2</Input_Sel></Input>
                 </Main_Zone>
-            </YAMAHA_AV>'''),
-            xmltodict.parse(mock_requests[2].get_data())
-            )
-        self.assertEquals(
-            xmltodict.parse('''<YAMAHA_AV cmd="PUT">
+            </YAMAHA_AV>''')
+        self._assert_request_data('''<YAMAHA_AV cmd="PUT">
                 <Main_Zone><Volume><Mute>Off</Mute></Volume></Main_Zone>
-            </YAMAHA_AV>'''),
-            xmltodict.parse(mock_requests[3].get_data())
-            )
+            </YAMAHA_AV>''')
         self.assertEquals('RX-V673', self.yamaha_talker._model)
 
     def test_mute_on(self):
+        self._start_talker()
+
         mock_requests = self._mockRequest(example_responses.Basic_Status)
 
         self.yamaha_talker.mute(True)
-
-        self.assertEquals(1, len(mock_requests))
-        self.assertEquals(
-            xmltodict.parse('''<YAMAHA_AV cmd="PUT">
+        self._assert_request_data('''<YAMAHA_AV cmd="PUT">
                 <Main_Zone><Volume><Mute>On</Mute></Volume></Main_Zone>
-            </YAMAHA_AV>'''),
-            xmltodict.parse(mock_requests[0].get_data())
-            )
+            </YAMAHA_AV>''', requests=mock_requests)
 
     def test_mute_off(self):
+        self._start_talker()
         mock_requests = self._mockRequest(example_responses.Basic_Status)
 
         self.yamaha_talker.mute(False)
 
-        self.assertEquals(1, len(mock_requests))
-        self.assertEquals(
-            xmltodict.parse('''<YAMAHA_AV cmd="PUT">
+        self._assert_request_data('''<YAMAHA_AV cmd="PUT">
                 <Main_Zone><Volume><Mute>Off</Mute></Volume></Main_Zone>
-            </YAMAHA_AV>'''),
-            xmltodict.parse(mock_requests[0].get_data())
-            )
+            </YAMAHA_AV>''', requests=mock_requests)
 
     def test_get_volume(self):
+        self._start_talker()
+
         mock_requests = self._mockRequest(example_responses.Basic_Status)
 
         self.yamaha_talker.get_volume()
 
-        self.assertEquals(1, len(mock_requests))
-        self.assertEquals(
-            xmltodict.parse('''<YAMAHA_AV cmd="GET">
+        self._assert_request_data('''<YAMAHA_AV cmd="GET">
                 <Main_Zone><Basic_Status>GetParam</Basic_Status></Main_Zone>
-            </YAMAHA_AV>'''),
-            xmltodict.parse(mock_requests[0].get_data())
-            )
+            </YAMAHA_AV>''', requests=mock_requests)
 
     def test_set_volume(self):
+        self._start_talker()
+
         volume = 20
         mock_requests = self._mockRequest(example_responses.Put_Volume)
 
         self.yamaha_talker.set_volume(volume)
-
-        self.assertEquals(1, len(mock_requests))
-        self.assertEquals(
-            xmltodict.parse('''<YAMAHA_AV cmd="PUT">
+        self._assert_request_data('''<YAMAHA_AV cmd="PUT">
                 <Main_Zone>
                     <Volume>
                         <Lvl><Val>%d</Val><Exp>1</Exp><Unit>dB</Unit></Lvl>
                     </Volume>
                 </Main_Zone>
-            </YAMAHA_AV>''' % -645),
-            xmltodict.parse(mock_requests[0].get_data())
-            )
+            </YAMAHA_AV>''' % -645, requests=mock_requests)
 
     def test_set_volume_is_aligned_to_whole_5_values(self):
+        self._start_talker()
+
         set_volume = 11
         expect_volume = -720
         mock_requests = self._mockRequest(example_responses.Put_Volume)
 
         self.yamaha_talker.set_volume(set_volume)
 
-        self.assertEquals(1, len(mock_requests))
-        self.assertEquals(
-            xmltodict.parse('''<YAMAHA_AV cmd="PUT">
+        self._assert_request_data('''<YAMAHA_AV cmd="PUT">
                 <Main_Zone>
                     <Volume>
                         <Lvl><Val>%d</Val><Exp>1</Exp><Unit>dB</Unit></Lvl>
                     </Volume>
                 </Main_Zone>
-            </YAMAHA_AV>''' % expect_volume),
-            xmltodict.parse(mock_requests[0].get_data())
-            )
+            </YAMAHA_AV>''' % expect_volume, requests=mock_requests)
+
+    def _start_talker(self, *args, **kwargs):
+        config = dict(self.default_config, **kwargs)
+        self.yamaha_talker = talker.YamahaTalker(**config)
+        self.mock_requests = self._mockRequest(example_responses.GetParam)
+        self.yamaha_talker.on_start()
 
     def _mockRequest(self, response_xml):
         mock_requests = []
@@ -158,3 +135,14 @@ class YamahaTalkerTest(unittest.TestCase):
 
         urllib2.install_opener(urllib2.build_opener(MockHTTPHandler))
         return mock_requests
+
+    def _assert_request_data(self, data, requests=None):
+        if requests is None:
+            requests = self.mock_requests
+        xml_data = xmltodict.parse(data)
+        matching = [
+            r for r in requests
+            if xml_data == xmltodict.parse(r.get_data())
+            ]
+        self.assertEquals(1, len(matching))
+        self.assertEquals(xml_data, xmltodict.parse(matching[0].get_data()))
