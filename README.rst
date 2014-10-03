@@ -54,6 +54,10 @@ Supported properties:
   ``HDMI1``, ``AV_1``, ``AUDIO_1``, etc. Leave unset if you don't want
   the mixer to change it for you.
 
+- ``party_mody``: Enable/Disable party mode. Party mode sends the same audio to
+  all of the receiver's zones. Not available on all receivers.
+  Example values: ``on`` or ``off``.
+
 Configuration example::
 
     [audio]
@@ -63,7 +67,8 @@ Configuration example::
     # and audio is connected to the HDMI 2 port.
     [yamaha]
     host = 192.168.1.15
-    source=HDMI2
+    source = HDMI2
+    party_mode = off
 
 
 Project resources
@@ -76,6 +81,14 @@ Project resources
 
 Changelog
 =========
+
+v0.2.3 (2014-10-03)
+-------------------
+- Add support for party mode
+
+v0.2.2 (2014-08-06)
+-------------------
+- Fix wrong configuration parameter in example docs
 
 v0.2.1 (2014-08-06)
 -------------------
