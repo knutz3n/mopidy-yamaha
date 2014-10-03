@@ -19,12 +19,13 @@ class YamahaTalkerTest(unittest.TestCase):
     default_config = {
         'host': '192.168.1.15',
         'source': 'HDMI2',
+        'party_mode': True
         }
 
     def test_on_start_sends_GetParam(self):
         self._start_talker()
 
-        self.assertEquals(4, len(self.mock_requests))
+        self.assertEquals(5, len(self.mock_requests))
         self._assert_request_data('''<YAMAHA_AV cmd="GET">
                 <System><Config>GetParam</Config></System>
             </YAMAHA_AV>''')
@@ -41,7 +42,30 @@ class YamahaTalkerTest(unittest.TestCase):
         self._assert_request_data('''<YAMAHA_AV cmd="PUT">
                 <Main_Zone><Volume><Mute>Off</Mute></Volume></Main_Zone>
             </YAMAHA_AV>''')
+        self._assert_request_data('''<YAMAHA_AV cmd="PUT">
+                <System><Party_Mode><Mode>On</Mode></Party_Mode></System>
+            </YAMAHA_AV>''')
         self.assertEquals('RX-V673', self.yamaha_talker._model)
+
+    def test_start_with_party_mode_on(self):
+        self._start_talker(party_mode=True)
+        self._assert_request_data('''<YAMAHA_AV cmd="PUT">
+                <System><Party_Mode><Mode>On</Mode></Party_Mode></System>
+            </YAMAHA_AV>''')
+
+    def test_start_with_party_mode_off(self):
+        self._start_talker(party_mode=False)
+        self._assert_request_data('''<YAMAHA_AV cmd="PUT">
+                <System><Party_Mode><Mode>Off</Mode></Party_Mode></System>
+            </YAMAHA_AV>''')
+
+    def test_start_with_party_mode_missing(self):
+        self._start_talker(party_mode=None)
+        party_mode_requests = [
+            r for r in self.mock_requests
+            if 'Party_Mode' in r.get_data()
+            ]
+        self.assertEquals(0, len(party_mode_requests))
 
     def test_mute_on(self):
         self._start_talker()

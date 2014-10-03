@@ -21,6 +21,7 @@ class Extension(ext.Extension):
         schema = super(Extension, self).get_config_schema()
         schema['host'] = config.String()
         schema['source'] = config.String(optional=True)
+        schema['party_mode'] = config.Boolean(optional=True)
         return schema
 
     def setup(self, registry):

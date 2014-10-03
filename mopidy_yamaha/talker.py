@@ -19,11 +19,12 @@ class YamahaTalker(pykka.ThreadingActor):
 
     _min_volume = -805
 
-    def __init__(self, host, source=None):
+    def __init__(self, host, source=None, party_mode=None):
         super(YamahaTalker, self).__init__()
 
         self.host = host
         self.source = source
+        self.party_mode = party_mode
 
         self._model = None
 
@@ -35,6 +36,7 @@ class YamahaTalker(pykka.ThreadingActor):
         self._power_device_on()
         self._select_input_source()
         self.mute(False)
+        self._set_party_mode()
 
     def _get_device_model(self):
         logger.info('Yamaha amplifier: Get device model from host "%s"',
@@ -50,6 +52,13 @@ class YamahaTalker(pykka.ThreadingActor):
     def _select_input_source(self):
         if self.source is not None:
             self._put('<Input><Input_Sel>%s</Input_Sel></Input>' % self.source)
+
+    def _set_party_mode(self):
+        if self.party_mode is not None:
+            mode = 'On' if self.party_mode else 'Off'
+            self._put(
+                '<Party_Mode><Mode>%s</Mode></Party_Mode>' % mode,
+                zone='System')
 
     def mute(self, mute):
         request = '<Volume><Mute>%s</Mute></Volume>'
