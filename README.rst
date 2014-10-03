@@ -82,6 +82,10 @@ Project resources
 Changelog
 =========
 
+v0.2.4 (2014-10-03)
+-------------------
+- Fix spelling in documentation
+
 v0.2.3 (2014-10-03)
 -------------------
 - Add support for party mode
