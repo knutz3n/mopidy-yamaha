@@ -23,6 +23,7 @@ class YamahaMixer(pykka.ThreadingActor, mixer.Mixer):
 
         self.host = config['yamaha']['host']
         self.source = config['yamaha']['source']
+        self.party_mode = config['yamaha']['party_mode']
 
         self._volume_cache = 0
         self._yamaha_talker = None
@@ -49,5 +50,6 @@ class YamahaMixer(pykka.ThreadingActor, mixer.Mixer):
         self._yamaha_talker = talker.YamahaTalker.start(
             host=self.host,
             source=self.source,
+            party_mode=self.party_mode,
         ).proxy()
         self._volume_cache = self._yamaha_talker.get_volume().get()
