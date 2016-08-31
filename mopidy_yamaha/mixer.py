@@ -35,6 +35,7 @@ class YamahaMixer(pykka.ThreadingActor, mixer.Mixer):
         self._volume_cache = volume
         self._yamaha_talker.set_volume(volume)
         self.trigger_volume_changed(volume)
+        return True
 
     def get_mute(self):
         return False
