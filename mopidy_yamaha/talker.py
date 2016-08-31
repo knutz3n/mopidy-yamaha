@@ -64,8 +64,10 @@ class YamahaTalker(pykka.ThreadingActor):
         request = '<Volume><Mute>%s</Mute></Volume>'
         if mute:
             self._put(request % 'On')
+            return True
         else:
             self._put(request % 'Off')
+            return False
 
     def get_volume(self):
         response = self._get('<Basic_Status>GetParam</Basic_Status>')
@@ -77,7 +79,7 @@ class YamahaTalker(pykka.ThreadingActor):
         logger.info(
             'Yamaha amplifier: Volume is "%d" (%d%%)',
             volume, percentage_volume)
-        return percentage_volume
+        return int(percentage_volume)
 
     def set_volume(self, volume):
         db_volume = (
