@@ -82,6 +82,10 @@ Project resources
 Changelog
 =========
 
+v0.2.6 (2017-12-09)
+-------------------
+- Fix 'YamahaMixer mixer returned bad data' Error. Thanks @rawdlite.
+
 v0.2.5 (2014-10-07)
 -------------------
 - Fix bug which caused party mode never to get enabled
