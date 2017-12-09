@@ -6,10 +6,6 @@ Mopidy-Yamaha
     :target: https://pypi.python.org/pypi/Mopidy-Yamaha/
     :alt: Latest PyPI version
 
-.. image:: https://img.shields.io/pypi/dm/Mopidy-Yamaha.svg?style=flat
-    :target: https://pypi.python.org/pypi/Mopidy-Yamaha/
-    :alt: Number of PyPI downloads
-
 .. image:: https://img.shields.io/travis/knutz3n/mopidy-yamaha/master.png?style=flat
     :target: https://travis-ci.org/knutz3n/mopidy-yamaha
     :alt: Travis CI build status
