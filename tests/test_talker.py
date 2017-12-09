@@ -1,9 +1,7 @@
 from __future__ import unicode_literals
 
 import unittest
-
 import urllib2
-
 from StringIO import StringIO
 
 import example_responses
