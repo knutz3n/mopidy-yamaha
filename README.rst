@@ -11,7 +11,7 @@ Mopidy-Yamaha
     :alt: Number of PyPI downloads
 
 .. image:: https://img.shields.io/travis/knutz3n/mopidy-yamaha/master.png?style=flat
-    :target: https://travis-ci.org/mopidy/mopidy-yamaha
+    :target: https://travis-ci.org/knutz3n/mopidy-yamaha
     :alt: Travis CI build status
 
 .. image:: https://img.shields.io/coveralls/knutz3n/mopidy-yamaha/master.svg?style=flat
